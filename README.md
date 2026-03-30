@@ -1,5 +1,45 @@
 # A-B-TEST-ANALYSIS
-End-to-end customer retention analysis using Python and SQL for data engineering, featuring an interactive  dashboard for cohort behavior tracking.
 
-A/B Test Business AnalysisThis project performs a comprehensive statistical analysis of an A/B test to determine the impact of a website variant on user conversion rates. The goal is to provide data-driven recommendations on whether to implement the new variant or stick with the control version.📊 Project OverviewIn this experiment, users were split into two groups:Control Group: Users who saw the original version of the page.Variant Group: Users who saw the new experimental version.The primary success metric is the Conversion Rate, defined as the percentage of users who generated revenue (REVENUE > 0).🛠️ Tech StackLanguage: PythonLibraries: pandas (Data Manipulation), statsmodels (Statistical Testing), seaborn/matplotlib (Visualization), pandasql (SQL-based Analysis).🔍 Analysis Workflow1. Data CleaningTo ensure the integrity of the test, the following steps were taken:Duplicate Removal: Each user ID was filtered to ensure unique entries, preventing a single user's behavior from skewing the results.Feature Engineering: A boolean converted column was created to distinguish between paying and non-paying users.2. Statistical Testing (Z-Test)We employed a Proportions Z-Test to check if the difference in conversion rates between the two groups was statistically significant.Control Conversion: ~1.50%Variant Conversion: ~1.35%P-Value Result: 0.60633. SQL AnalysisUsing pandasql, we verified the results with standard SQL queries to demonstrate cross-functional capability in both Python and SQL environments.📈 Key FindingsNo Statistical Significance: The p-value (0.6063) is significantly higher than the standard threshold of $0.05$.Business Impact: The difference observed between the Control and Variant groups is likely due to random chance rather than the changes made in the variant.Recommendation: Based on the current data, we fail to reject the Null Hypothesis. I recommend not deploying the variant and instead investigating other design or functional changes to improve conversion.🚀 How to RunEnsure you have the dataset AB_Test_Results.csv in the root directory.Install dependencies:Bashpip install pandas statsmodels seaborn matplotlib pandasql
-Run the AB_Testing_Business_Analysis.ipynb notebook.
+ A/B Test Business Analysis
+
+ 1) Purpose
+Evaluate whether a new website variant improves conversion rate compared to the control and provide a go/no-go recommendation.
+
+ 2) Experiment Design
+- **Population split:** Control (original page) vs Variant (new page)
+- **Primary metric:** Conversion Rate = % of users with `REVENUE > 0`
+- **Statistical test:** Two-proportion Z-test
+
+ 3) Tech Stack
+- Python
+- pandas (data prep), statsmodels (stats), seaborn/matplotlib (viz), pandasql (SQL-style queries)
+
+ 4) Data Preparation
+- **Duplicate removal:** Enforced unique user IDs to prevent repeat counting.
+- **Feature engineering:** Added boolean `converted` flag for paying vs non-paying users.
+
+ 5) Results (Z-Test)
+- Control conversion ≈ **1.50%**
+- Variant conversion ≈ **1.35%**
+- P-value = **0.6063**
+
+ 6) Interpretation
+- No statistically significant lift (p-value ≫ 0.05).
+- Observed difference is likely random noise.
+- **Recommendation:** Fail to reject the null; do **not** roll out the variant. Explore other design/feature changes to drive conversion.
+
+ 7) Reproducing the Analysis
+1. Place `AB_Test_Results.csv` in the project root.
+2. Install dependencies:
+   ```bash
+   pip install pandas statsmodels seaborn matplotlib pandasql
+   ```
+3. Run the notebook:
+   ```bash
+   jupyter notebook AB_Testing_Business_Analysis.ipynb
+   ```
+
+ 8) Repository Structure
+- `AB_Testing_Business_Analysis.ipynb` — main analysis notebook
+- `AB_Test_Results.csv` — input dataset (not tracked)
+- `README.md` — project documentation
